@@ -1,22 +1,9 @@
 angular.module('manicure.controllers', [])
 
-.controller('ManicureCtrl', function($rootScope, $scope, $state) {
+.controller('AppCtrl', function($scope, $state) {
+  console.log("chamou");
 
-  $rootScope.typeAccount = {
-    isManicure: false
-  };
 
-  $scope.defineAccount = function(response){
-
-    if(response === 'yes'){
-      $rootScope.typeAccount.isManicure = true;
-    }else{
-      $rootScope.typeAccount.isManicure = false;
-    };
-
-    $state.go("tab.account");
-
-  };
 
 })
 
@@ -39,7 +26,9 @@ angular.module('manicure.controllers', [])
   $scope.friend = Professionals.get($stateParams.friendId);
 })
 
-.controller('AccountCtrl', function($scope, Location) {
+.controller('AccountCtrl', function($scope, $ionicSlideBoxDelegate, $state, Location) {
+
+  console.log($ionicSlideBoxDelegate.enableSlide(false));
 
   $scope.states = Location.states();
   $scope.account = {
@@ -66,6 +55,29 @@ angular.module('manicure.controllers', [])
 
   $scope.save = function(){
     console.log("-=-=saved=-=-", $scope.account);
+  };
+
+  $scope.next = function(){
+    $ionicSlideBoxDelegate.next();
+  };
+
+  $scope.previous = function(){
+    $ionicSlideBoxDelegate.previous();
+  };
+
+  $scope.typeAccount = {
+    isManicure: false
+  };
+
+  $scope.defineAccount = function(response){
+
+    if(response === 'yes'){
+      $scope.typeAccount.isManicure = true;
+    }else{
+      $scope.typeAccount.isManicure = false;
+    };
+
+    // $state.go("app.account");
   };
 
 })

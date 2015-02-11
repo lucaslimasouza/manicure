@@ -28,41 +28,63 @@ angular.module('manicure', ['ionic', 'manicure.controllers', 'manicure.services'
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-
-  // setup an abstract state for the tabs directive
-    .state('tab', {
-    url: "/tab",
-    abstract: true,
-    templateUrl: "templates/tabs.html"
+    .state('app', {
+      abstract: true,
+      url: '/',
+      templateUrl: 'index.html',
+      controller: 'AppCtrl'
   })
 
-  // Each tab has its own nav history stack:
-
-  .state('tab.home', {
-    url: '/home',
+  .state('app.account', {
+    url: 'account',
     views: {
-      'tab-home': {
-        templateUrl: 'templates/ask.html',
-        controller: 'ManicureCtrl'
-      }
-    }
-  })
-
-  .state('tab.account', {
-    url: '/account',
-    views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-account.html',
+      '': {
+        templateUrl: 'templates/account.html',
         controller: 'AccountCtrl'
       },
-      'account-professional@tab.account':{
-        templateUrl: 'templates/professional/account.html'
+      'account-professional@app.account':{
+        templateUrl: 'templates/login/prof-account.html'
         },
-      'account-client@tab.account':{
-        templateUrl: 'templates/client/account.html'
+      'account-client@app.account':{
+        templateUrl: 'templates/login/client-account.html'
       }
     }
   })
+
+  // setup an abstract state for the tabs directive
+  // .state('tab', {
+  //   url: "/tab",
+  //   abstract: true,
+  //   templateUrl: "templates/tabs.html"
+  // })
+
+  // // Each tab has its own nav history stack:
+
+  // .state('tab.home', {
+  //   url: '/home',
+  //   views: {
+  //     'tab-home': {
+  //       templateUrl: 'templates/ask.html',
+  //       controller: 'ManicureCtrl'
+  //     }
+  //   }
+  // })
+
+  // .state('tab.account', {
+  //   url: '/account',
+  //   views: {
+  //     'tab-account': {
+  //       templateUrl: 'templates/account.html',
+  //       controller: 'AccountCtrl'
+  //     },
+  //     'account-professional@tab.account':{
+  //       templateUrl: 'templates/login/prof-account.html'
+  //       },
+  //     'account-client@tab.account':{
+  //       templateUrl: 'templates/login/client-account.html'
+  //     }
+  //   }
+  // })
 
   // .state('tab.chats', {
   //     url: '/chats',
@@ -83,16 +105,16 @@ angular.module('manicure', ['ionic', 'manicure.controllers', 'manicure.services'
   //     }
   //   })
 
-  .state('tab.professionals', {
-      url: '/professionals',
-      views: {
-        'tab-professionals': {
-          templateUrl: 'templates/tab-professionals.html',
-          controller: 'ProfessionalsCtrl'
-        }
-      }
-    });
-  //   .state('tab.friend-detail', {
+  // .state('tab.professionals', {
+  //     url: '/professionals',
+  //     views: {
+  //       'tab-professionals': {
+  //         templateUrl: 'templates/tab-professionals.html',
+  //         controller: 'ProfessionalsCtrl'
+  //       }
+  //     }
+  //   });
+  // //   .state('tab.friend-detail', {
   //     url: '/friend/:friendId',
   //     views: {
   //       'tab-friends': {
@@ -104,6 +126,6 @@ angular.module('manicure', ['ionic', 'manicure.controllers', 'manicure.services'
 
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/home');
+  $urlRouterProvider.otherwise('/account');
 
 });
