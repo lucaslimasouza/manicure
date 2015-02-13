@@ -1,0 +1,22 @@
+<ion-view view-title="Definição de Perfil" ng-hide="typeAccount.isManicure">
+  <ion-content class="padding">
+
+  <h3 class="text-center">Você é <strong>Manicure</strong>?</h3>
+
+  <div class="text-center">
+
+    <button class="button button-balanced" ng-click="defineAccount('yes')">
+     Sim
+    </button>
+
+    <button class="button button-assertive" ng-click="defineAccount('no')">
+     Não
+    </button>
+
+  </div>
+  </ion-content>
+</ion-view>
+<span ng-bind="typeAccount.isClient"></span>
+<ion-nav-view ng-if="typeAccount.isClient" name="account-client"></ion-nav-view>
+<ion-nav-view ng-if="typeAccount.isManicure" name="account-professional"></ion-nav-view>
+

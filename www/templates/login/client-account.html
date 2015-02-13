@@ -1,0 +1,51 @@
+<ion-view view-title="Perfil" ng-show="typeAccount.isClient">
+
+  <ion-content class="padding">
+
+    <ion-list>
+      <!-- INFORMAÇÕES DO PROFISSIONAL NOME/CELL-->
+      <form>
+        <label class="item item-input">
+
+          <input type="text" placeholder="Nome" required ng-model="account.name">
+
+        </label>
+
+        <label class="item item-input">
+
+          <input type="text" placeholder="nº cel" ng-model="account.cellphone">
+
+        </label>
+
+        <!-- INFORMAÇÕES DO PROFISSIONAL LOCALIZACAO-->
+        <label class="item item-input item-select">
+
+          <div class="input-label">
+            Estado:
+          </div>
+
+          <select ng-options="state.name for state in states track by state.id" ng-model="account.selectedState" ng-change="updateCities(account.selectedState)"></select>
+
+        </label>
+
+        <label class="item item-input item-select">
+
+          <div class="input-label">
+            Cidade:
+          </div>
+
+          <select ng-options="city.name for city in cities track by city.id" ng-model="account.selectedCity"></select>
+
+        </label>
+
+        <!-- BOTÃO PARA SALVAR INFORMAÇÕES -->
+        <button class="button button-block button-positive" ng-click="save()">
+         Entrar
+        </button>
+
+      </form>
+    </ion-list>
+
+  </ion-content>
+
+</ion-view>
