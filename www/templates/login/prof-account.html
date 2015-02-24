@@ -1,142 +1,73 @@
-<ion-view view-title="Perfil" ng-show="typeAccount.isManicure">
+<ion-view view-title="Perfil">
 
   <ion-content class="padding">
 
     <ion-list>
 
-      <ion-slide-box>
+      <div class="list padding">
+        <!-- INFORMAÇÕES DO PROFISSIONAL  TEMPO MEDIO-->
+        <div class="item item-divider">
+          Qual o tempo médio para concluir:
+        </div>
 
-         <ion-slide>
-          <!-- INFORMAÇÕES DO PROFISSIONAL NOME/CELL-->
-          <div class="list padding">
-            <label class="item item-input">
-              <span class="input-label">Nome</span>
-              <input type="text" ng-model="account.name">
+        <label class="item item-input">
 
-            </label>
-
-            <label class="item item-input">
-            <span class="input-label">nº cel</span>
-              <input type="text" ng-model="account.cellphone">
-
-            </label>
-
-            <!-- INFORMAÇÕES DO PROFISSIONAL LOCALIZACAO-->
-            <label class="item item-input item-select">
-
-              <div class="input-label">
-                Estado:
-              </div>
-
-              <select ng-options="state.name for state in states track by state.id" ng-model="account.selectedState" ng-change="updateCities(account.selectedState)"></select>
-
-            </label>
-
-            <label class="item item-input item-select">
-
-              <div class="input-label">
-                Cidade:
-              </div>
-
-              <select ng-options="city.name for city in cities track by city.id" ng-model="account.selectedCity"></select>
-
-            </label>
-
+          <div class="input-label">
+            mãos:
           </div>
 
-          <a class=" button icon-right ion-chevron-right button-clear button-dark" ng-click="next()">
-           proximo
-          </a>
-
-        </ion-slide>
+          <input type="range" name="accountTimeHands" min="0.5" max="2" ng-model="account.time.hands">
+          <h4 class="text-center">{{account.time.hands}} hora(s)</h4>
 
 
+        </label>
 
-        <ion-slide>
+        <label class="item item-input">
 
-          <div class="list padding">
-            <!-- INFORMAÇÕES DO PROFISSIONAL  TEMPO MEDIO-->
-            <h4 class="text-center">
-              Qual o tempo médio para concluir:
-            </h4>
-
-            <label class="item item-input">
-
-              <div class="input-label">
-                mãos:
-              </div>
-
-              <input type="range" name="accountTimeHands" min="0.5" max="2" ng-model="account.time.hands">
-              <h4 class="text-center">{{account.time.hands}} hora(s)</h4>
-
-
-            </label>
-
-            <label class="item item-input">
-
-              <div class="input-label">
-                pés:
-              </div>
-
-              <input type="range" name="accountTimeFeet" min="0.5" max="2" ng-model="account.time.feet">
-              <h4 class="text-center">{{account.time.feet}} hora(s)</h4>
-
-            </label>
-
-              <a class="button icon-left ion-chevron-left button-clear button-dark" ng-click="previous()">
-               Voltar
-              </a>
-
-              <a class="button icon-right ion-chevron-right button-clear button-dark" ng-click="next()">
-               proximo
-              </a>
+          <div class="input-label">
+            pés:
           </div>
 
-        </ion-slide>
+          <input type="range" name="accountTimeFeet" min="0.5" max="2" ng-model="account.time.feet">
+          <h4 class="text-center">{{account.time.feet}} hora(s)</h4>
 
-        <ion-slide>
-          <div class="list padding">
-            <!-- INFORMAÇÕES DO PROFISSIONAL  VALOR MEDIO -->
-            <h4 class="text-center">
-              Qual o valor médio para concluir:
-            </h4>
+        </label>
 
-            <label class="item item-input">
+        <!-- INFORMAÇÕES DO PROFISSIONAL  VALOR MEDIO -->
+        <div class="item item-divider">
+          Qual o valor médio para concluir:
+        </div>
 
-              <div class="input-label">
-                mãos:
-              </div>
+        <label class="item item-input">
 
-              <input type="range" name="accountPriceHands" min="10" max="100" ng-model="account.price.hands">
-              <h4 class="text-center">R$ {{account.price.hands}}.00</h4>
-
-            </label>
-
-            <label class="item item-input">
-
-              <div class="input-label">
-                pés:
-              </div>
-
-              <input type="range" name="accountPriceHands" min="10" max="100" ng-model="account.price.feet">
-              <h4 class="text-center">R$ {{account.price.feet}}.00</h4>
-
-            </label>
-
-            <a class="button icon-left ion-chevron-left button-clear button-dark" ng-click="previous()">
-             Voltar
-            </a>
-
-            <!-- BOTÃO PARA SALVAR INFORMAÇÕES -->
-            <button class="button button-clear button-positive" ng-click="save()">
-             Entrar
-            </button>
-
+          <div class="input-label">
+            mãos:
           </div>
 
-        </ion-slide>
+          <input type="range" name="accountPriceHands" min="10" max="100" ng-model="account.price.hands">
+          <h4 class="text-center">R$ {{account.price.hands}}.00</h4>
 
-      </ion-slide-box>
+        </label>
+
+        <label class="item item-input">
+
+          <div class="input-label">
+            pés:
+          </div>
+
+          <input type="range" name="accountPriceHands" min="10" max="100" ng-model="account.price.feet">
+          <h4 class="text-center">R$ {{account.price.feet}}.00</h4>
+
+        </label>
+
+        <!-- BOTÃO PARA SALVAR INFORMAÇÕES -->
+        <button class="button button-block button-positive" ng-click="save()">
+         Entrar
+        </button>
+
+      </div>
+
+
 
     </ion-list>
 

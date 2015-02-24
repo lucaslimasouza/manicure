@@ -1,22 +1,62 @@
 <ion-view view-title="Definição de Perfil" ng-hide="typeAccount.isManicure">
   <ion-content class="padding">
 
-  <h3 class="text-center">Você é <strong>Manicure</strong>?</h3>
+  <!-- INFORMAÇÕES DO PROFISSIONAL NOME/CELL-->
+    <div class="list padding">
+      <label class="item item-input">
+        <span class="input-label">Nome</span>
+        <input type="text" ng-model="account.name">
 
-  <div class="text-center">
+      </label>
 
-    <button class="button button-balanced" ng-click="defineAccount('yes')">
-     Sim
-    </button>
+      <label class="item item-input">
+      <span class="input-label">nº cel</span>
+        <input type="text" ng-model="account.cellphone">
 
-    <button class="button button-assertive" ng-click="defineAccount('no')">
-     Não
-    </button>
+      </label>
 
-  </div>
+      <!-- INFORMAÇÕES DO PROFISSIONAL LOCALIZACAO-->
+      <label class="item item-input item-select">
+
+        <div class="input-label">
+          Estado:
+        </div>
+
+        <select ng-options="state.name for state in states track by state.id" ng-model="account.selectedState" ng-change="updateCities(account.selectedState)"></select>
+
+      </label>
+
+      <label class="item item-input item-select">
+
+        <div class="input-label">
+          Cidade:
+        </div>
+
+        <select ng-options="city.name for city in cities track by city.id" ng-model="account.selectedCity"></select>
+
+      </label>
+
+      <div class="item item-divider">
+        Você é manicure?
+      </div>
+
+      <ion-radio ng-value="true"
+                 ng-model="account.isProf">
+        Sim
+      </ion-radio>
+
+      <ion-radio ng-value="false"
+                 ng-model="account.isProf">
+        Não
+      </ion-radio>
+
+      <!-- BOTÃO PARA SALVAR INFORMAÇÕES -->
+      <button class="button button-block button-positive" ng-click="save()">
+       Entrar
+      </button>
+
+    </div>
+
   </ion-content>
 </ion-view>
-<span ng-bind="typeAccount.isClient"></span>
-<ion-nav-view ng-if="typeAccount.isClient" name="account-client"></ion-nav-view>
-<ion-nav-view ng-if="typeAccount.isManicure" name="account-professional"></ion-nav-view>
 

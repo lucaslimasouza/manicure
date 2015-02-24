@@ -37,18 +37,14 @@ angular.module('manicure', ['ionic', 'manicure.controllers', 'manicure.services'
 
   .state('app.account', {
     url: 'account',
-    views: {
-      '': {
-        templateUrl: 'templates/account.html',
-        controller: 'AccountCtrl'
-      },
-      'account-professional@app.account':{
-        templateUrl: 'templates/login/prof-account.html'
-        },
-      'account-client@app.account':{
-        templateUrl: 'templates/login/client-account.html'
-      }
-    }
+    templateUrl: 'templates/account.html',
+    controller: 'AccountCtrl'
+  })
+
+  .state('app.prof', {
+    url: '/prof',
+    templateUrl: 'templates/login/prof-account.html',
+    controller: 'AccountCtrl'
   })
 
   // setup an abstract state for the tabs directive

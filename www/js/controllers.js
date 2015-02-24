@@ -1,6 +1,6 @@
 angular.module('manicure.controllers', [])
 
-.controller('AppCtrl', function($scope, $state) {
+.controller('AppCtrl', function($scope) {
 })
 
 .controller('ChatsCtrl', function($scope, Chats) {
@@ -22,12 +22,11 @@ angular.module('manicure.controllers', [])
   $scope.friend = Professionals.get($stateParams.friendId);
 })
 
-.controller('AccountCtrl', function($scope, $ionicSlideBoxDelegate, $state, Location) {
-
-  console.log($ionicSlideBoxDelegate.enableSlide());
+.controller('AccountCtrl', function($scope, $state, Location) {
 
   $scope.states = Location.states();
   $scope.account = {
+    isProf: false,
     name: "",
     cellphone: "",
     selectedState: {id: 0},
@@ -44,7 +43,6 @@ angular.module('manicure.controllers', [])
 
   $scope.typeAccount = {
     isManicure: false,
-    isClient: false,
     valid: false
   };
 
@@ -75,49 +73,20 @@ angular.module('manicure.controllers', [])
   };
 
   $scope.save = function(){
-    console.log("vlaidation", $scope.account.name.$valid);
+    if($scope.account.isProf){
+      console.log("entrou")
+      $state.go('app.prof');
+    }
     console.log("-=-=saved=-=-", $scope.account);
   };
-
-  $scope.next = function(){
-    $ionicSlideBoxDelegate.next();
-  };
-
-  $scope.previous = function(){
-    $ionicSlideBoxDelegate.previous();
-  };
-
 
   $scope.defineAccount = function(response){
 
     if(response === 'yes'){
-      $scope.typeAccount.isManicure = true;
-    }else{
-      $scope.typeAccount.isClient = true;
-    };
-
-  };
-
-})
-
-.controller('ClientCtrl', function($scope, Location) {
-
-  $scope.states = Location.states();
-  $scope.account = {
-      name: "",
-      cellphone: "",
-      selectedState: {id: 0},
-      selectedCity: {id: 0}
-    };
-
-  $scope.save = function(){
-
-  };
-
-  $scope.updateCities = function(state){
-    if(state.id != 0){
-      $scope.cities = Location.cities(state.id);
+      $scope.account.isProf = true;
     }
+
+    console.log("========-=-=",$scope.account.isProf);
 
   };
 
