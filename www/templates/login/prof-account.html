@@ -12,24 +12,21 @@
 
         <label class="item item-input">
 
-          <div class="input-label">
-            mãos:
+          <span class="input-label">mãos: {{account.time.hands}} hora(s)</span>
+
+          <div class="range">
+            <input type="range" name="accountTimeHands" min="0.5" max="2" ng-model="account.time.hands">
           </div>
-
-          <input type="range" name="accountTimeHands" min="0.5" max="2" ng-model="account.time.hands">
-          <h4 class="text-center">{{account.time.hands}} hora(s)</h4>
-
 
         </label>
 
         <label class="item item-input">
 
-          <div class="input-label">
-            pés:
-          </div>
+          <span class="input-label">pés: {{account.time.feet}} hora(s)</span>
 
-          <input type="range" name="accountTimeFeet" min="0.5" max="2" ng-model="account.time.feet">
-          <h4 class="text-center">{{account.time.feet}} hora(s)</h4>
+          <div class="range">
+            <input type="range" name="accountTimeFeet" min="0.5" max="2" ng-model="account.time.feet">
+          </div>
 
         </label>
 
@@ -40,23 +37,21 @@
 
         <label class="item item-input">
 
-          <div class="input-label">
-            mãos:
-          </div>
+          <span class="input-label">mãos: R$ {{account.price.hands}}.00</span>
 
-          <input type="range" name="accountPriceHands" min="10" max="100" ng-model="account.price.hands">
-          <h4 class="text-center">R$ {{account.price.hands}}.00</h4>
+          <div class="range">
+            <input type="range" name="accountPriceHands" min="10" max="100" ng-model="account.price.hands">
+          </div>
 
         </label>
 
         <label class="item item-input">
 
-          <div class="input-label">
-            pés:
-          </div>
+          <span class="input-label">pés: R$ {{account.price.feet}}.00</span>
 
-          <input type="range" name="accountPriceHands" min="10" max="100" ng-model="account.price.feet">
-          <h4 class="text-center">R$ {{account.price.feet}}.00</h4>
+          <div class="range">
+            <input type="range" name="accountPriceHands" min="10" max="100" ng-model="account.price.feet">
+          </div>
 
         </label>
 

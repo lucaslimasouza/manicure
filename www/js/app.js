@@ -37,7 +37,7 @@ angular.module('manicure', ['ionic', 'manicure.controllers', 'manicure.services'
 
   .state('app.account', {
     url: 'account',
-    templateUrl: 'templates/account.html',
+    templateUrl: 'templates/login/index.html',
     controller: 'AccountCtrl'
   })
 
@@ -48,23 +48,40 @@ angular.module('manicure', ['ionic', 'manicure.controllers', 'manicure.services'
   })
 
   // setup an abstract state for the tabs directive
-  // .state('tab', {
-  //   url: "/tab",
-  //   abstract: true,
-  //   templateUrl: "templates/tabs.html"
-  // })
+  .state('tab', {
+    url: "/tab",
+    abstract: true,
+    templateUrl: "templates/tabs.html"
+  })
 
   // // Each tab has its own nav history stack:
+  .state('tab.home', {
+    url: '/home',
+    views: {
+      'tab-home': {
+        templateUrl: 'templates/client/tab-home.html',
+      }
+    }
+  })
 
-  // .state('tab.home', {
-  //   url: '/home',
-  //   views: {
-  //     'tab-home': {
-  //       templateUrl: 'templates/ask.html',
-  //       controller: 'ManicureCtrl'
-  //     }
-  //   }
-  // })
+  .state('tab.professionals', {
+      url: '/professionals',
+      views: {
+        'tab-professionals': {
+          templateUrl: 'templates/professional/tab-list.html',
+          controller: 'ProfessionalsCtrl'
+        }
+      }
+    })
+    .state('tab.professional-detail', {
+      url: '/professionals/:profId',
+      views: {
+        'tab-professionals': {
+          templateUrl: 'templates/professional/professional-detail.html',
+          controller: 'ProfDetailCtrl'
+        }
+      }
+    })
 
   // .state('tab.account', {
   //   url: '/account',
@@ -101,24 +118,8 @@ angular.module('manicure', ['ionic', 'manicure.controllers', 'manicure.services'
   //     }
   //   })
 
-  // .state('tab.professionals', {
-  //     url: '/professionals',
-  //     views: {
-  //       'tab-professionals': {
-  //         templateUrl: 'templates/tab-professionals.html',
-  //         controller: 'ProfessionalsCtrl'
-  //       }
-  //     }
-  //   });
-  // //   .state('tab.friend-detail', {
-  //     url: '/friend/:friendId',
-  //     views: {
-  //       'tab-friends': {
-  //         templateUrl: 'templates/friend-detail.html',
-  //         controller: 'FriendDetailCtrl'
-  //       }
-  //     }
-  //   })
+
+
 
 
   // if none of the above states are matched, use this as the fallback

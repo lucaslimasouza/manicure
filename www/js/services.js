@@ -82,31 +82,36 @@ angular.module('manicure.services', [])
   var professionails = [{
     id: 0,
     name: 'Ben Sparrow',
-    notes: 'Enjoys drawing things',
+    cellphone: "(35) 99999-9999",
+    price: {feet: 25.0, hands: 20.0},
     selectedCity: {id: 11},
     face: 'https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png'
   }, {
     id: 1,
     name: 'Max Lynx',
-    notes: 'Odd obsession with everything',
+    cellphone: "(35) 99999-9999",
+    price: {feet: 25.0, hands: 20.0},
     selectedCity: {id: 13},
     face: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460'
   }, {
     id: 2,
     name: 'Andrew Jostlen',
-    notes: 'Wears a sweet leather Jacket. I\'m a bit jealous',
+    cellphone: "(35) 99999-9999",
+    price: {feet: 25.0, hands: 20.0},
     selectedCity: {id: 12},
     face: 'https://pbs.twimg.com/profile_images/491274378181488640/Tti0fFVJ.jpeg'
   }, {
     id: 3,
     name: 'Adam Bradleyson',
-    notes: 'I think he needs to buy a boat',
+    cellphone: "(35) 99999-9999",
+    price: {feet: 25.0, hands: 20.0},
     selectedCity: {id: 11},
     face: 'https://pbs.twimg.com/profile_images/479090794058379264/84TKj_qa.jpeg'
   }, {
     id: 4,
     name: 'Perry Governor',
-    notes: 'Just the nicest guy',
+    cellphone: "(35) 99999-9999",
+    price: {feet: 25.0, hands: 20.0},
     selectedCity: {id: 11},
     face: 'https://pbs.twimg.com/profile_images/491995398135767040/ie2Z_V6e.jpeg'
   }];
@@ -120,16 +125,15 @@ angular.module('manicure.services', [])
       professionails.forEach(function(professional){
 
         if(city.id === professional.selectedCity.id){
-          console.log(professional);
           professionailsSelected.push(professional);
         }
 
       });
       return professionailsSelected;
     },
-    get: function(friendId) {
+    get: function(profId) {
       // Simple index lookup
-      return friends[friendId];
+      return professionails[profId];
     }
   }
 });

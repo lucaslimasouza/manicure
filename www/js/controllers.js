@@ -15,11 +15,42 @@ angular.module('manicure.controllers', [])
 })
 
 .controller('ProfessionalsCtrl', function($scope, Professionals) {
+  // PASSAR O ID DA LOCALIDADE DO USUÁRIO
   $scope.friends = Professionals.all({id:11});
 })
 
-.controller('FriendDetailCtrl', function($scope, $stateParams, Professionals) {
-  $scope.friend = Professionals.get($stateParams.friendId);
+.controller('ProfDetailCtrl', function($scope, $stateParams, Professionals) {
+  $scope.prof = Professionals.get($stateParams.profId);
+
+  $scope.schedule = {
+    user: "",
+    date: "",
+    time: ""
+  }
+
+  $scope.save = function(){
+    console.log("agendamento =====");
+  };
+
+  // var options = {
+  //     date: new Date(),
+  //     mode: 'date', // or 'time'
+  //     minDate: new Date() - 10000,
+  //     allowOldDates: true,
+  //     allowFutureDates: false,
+  //     doneButtonLabel: 'DONE',
+  //     doneButtonColor: '#F2F3F4',
+  //     cancelButtonLabel: 'CANCEL',
+  //     cancelButtonColor: '#000000'
+  //   };
+
+  // $scope.clickDate = function (){
+
+  //   $cordovaDatePicker.show(options).then(function(date){
+  //     console.log("========date", date);
+  //   });
+
+  // };
 })
 
 .controller('AccountCtrl', function($scope, $state, Location) {
@@ -74,20 +105,12 @@ angular.module('manicure.controllers', [])
 
   $scope.save = function(){
     if($scope.account.isProf){
-      console.log("entrou")
       $state.go('app.prof');
+    }else{
+      $state.go('tab.home');
     }
     console.log("-=-=saved=-=-", $scope.account);
   };
 
-  $scope.defineAccount = function(response){
-
-    if(response === 'yes'){
-      $scope.account.isProf = true;
-    }
-
-    console.log("========-=-=",$scope.account.isProf);
-
-  };
 
 });

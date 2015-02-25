@@ -1,0 +1,41 @@
+<!--
+This template loads for the 'tab.friend-detail' state (app.js)
+'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+The FriendsCtrl pulls data from the Friends service (service.js)
+The Friends service returns an array of friend data
+-->
+<ion-view view-title="{{prof.name}}">
+  <ion-content class="padding">
+
+    <img ng-src="{{prof.face}}" style="width: 64px; height: 64px">
+
+    <div class="item item-button-right">
+      {{prof.cellphone}}
+      <button class="button button-balanced">
+        <i class="icon ion-ios7-telephone"></i>
+      </button>
+    </div>
+
+    <div class="item">
+      <strong>Mão: </strong>R$ {{prof.price.hands}}
+      <strong>Pés: </strong>R$ {{prof.price.feet}}
+    </div>
+
+    <div class="item item-divider">Solicite um agendamento</div>
+
+      <label class="item item-input">
+      <span class="input-label">data:</span>
+        <input type="date" ng-model="schedule.date">
+      </label>
+
+      <label class="item item-input">
+      <span class="input-label">horas:</span>
+        <input type="time" ng-model="schedule.time">
+
+      </label>
+
+      <button class="button button-block icon-left ion-calendar button-positive" ng-click="save()"> Agendar
+      </button>
+
+  </ion-content>
+</ion-view>
