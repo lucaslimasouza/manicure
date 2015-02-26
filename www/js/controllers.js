@@ -19,43 +19,31 @@ angular.module('manicure.controllers', [])
   $scope.friends = Professionals.all({id:11});
 })
 
-.controller('ProfDetailCtrl', function($scope, $stateParams, Professionals) {
+.controller('ProfDetailCtrl', function($scope, $stateParams, $state, Professionals) {
   $scope.prof = Professionals.get($stateParams.profId);
 
+  // $scope.time = {
+  //   hours: ["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","00"],
+  //   minutes: ["00","15","30","45"]
+  // };
+
   $scope.schedule = {
-    user: "",
+    client: "",
+    prof: $scope.prof,
     date: "",
-    time: ""
-  }
+    time: {hour: "", minutes: ""}
+  };
 
   $scope.save = function(){
     console.log("agendamento =====");
+    $state.go('tab.home');
   };
-
-  // var options = {
-  //     date: new Date(),
-  //     mode: 'date', // or 'time'
-  //     minDate: new Date() - 10000,
-  //     allowOldDates: true,
-  //     allowFutureDates: false,
-  //     doneButtonLabel: 'DONE',
-  //     doneButtonColor: '#F2F3F4',
-  //     cancelButtonLabel: 'CANCEL',
-  //     cancelButtonColor: '#000000'
-  //   };
-
-  // $scope.clickDate = function (){
-
-  //   $cordovaDatePicker.show(options).then(function(date){
-  //     console.log("========date", date);
-  //   });
-
-  // };
 })
 
-.controller('AccountCtrl', function($scope, $state, Location) {
+.controller('AccountCtrl', function($scope, $state, $localstorage, Location) {
 
   $scope.states = Location.states();
+
   $scope.account = {
     isProf: false,
     name: "",
@@ -77,21 +65,11 @@ angular.module('manicure.controllers', [])
     valid: false
   };
 
-  var validation = function(){
+  var init = function(){
+    var jsonUser = $localstorage.get('jsonUser', undefined);
 
-    var message = "Preecha por favor";
-
-    if($scope.account.name === "") $scope.message.name = message;
-    if($scope.account.cellphone === "") $scope.message.cellphone = message;
-    if($scope.account.selectedState.id === 0 ) $scope.message.selectedState = message;
-    if($scope.account.selectedCity.id === 0 ) $scope.message.selectedCity = message;
-
-    if($scope.typeAccount.isManicure){
-
-      if($scope.account.time.feet === 0 ) $scope.message.time.feet = message;
-      if($scope.account.time.hands === 0) $scope.message.time.hands = message;
-      if($scope.account.price.feet === 0) $scope.message.price.feet = message;
-      if($scope.account.price.hands === 0) $scope.message.price.hands = message;
+    if(jsonUser !== undefined){
+      $state.go("tab.home");
     }
 
   };
@@ -104,13 +82,16 @@ angular.module('manicure.controllers', [])
   };
 
   $scope.save = function(){
+    var jsonUser = JSON.stringify($scope.account);
+    $localstorage.set('jsonUser', jsonUser);
+
     if($scope.account.isProf){
       $state.go('app.prof');
     }else{
       $state.go('tab.home');
     }
-    console.log("-=-=saved=-=-", $scope.account);
   };
 
+  init();
 
 });

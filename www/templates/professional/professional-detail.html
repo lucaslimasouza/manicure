@@ -23,19 +23,33 @@ The Friends service returns an array of friend data
 
     <div class="item item-divider">Solicite um agendamento</div>
 
-      <label class="item item-input">
-      <span class="input-label">data:</span>
-        <input type="date" ng-model="schedule.date">
-      </label>
+    <label class="item item-input">
+    <span class="input-label">data:</span>
+      <input type="date" ng-model="schedule.date">
+    </label>
 
-      <label class="item item-input">
-      <span class="input-label">horas:</span>
-        <input type="time" ng-model="schedule.time">
+    <label class="item item-input">
 
-      </label>
+      <span class="input-label">horas: {{schedule.time.hour}}</span>
 
-      <button class="button button-block icon-left ion-calendar button-positive" ng-click="save()"> Agendar
-      </button>
+      <div class="range">
+        <input type="range" name="scheduleHour" min="0" max="23" ng-model="schedule.time.hour">
+      </div>
+
+    </label>
+
+    <label class="item item-input">
+
+      <span class="input-label">minutos: {{schedule.time.minutes}}</span>
+
+      <div class="range">
+        <input type="range" name="scheduleHour" min="0" max="45" ng-model="schedule.time.minutes">
+      </div>
+
+    </label>
+
+    <button class="button button-block icon-left ion-calendar button-positive" ng-click="save()"> agendar
+    </button>
 
   </ion-content>
 </ion-view>
