@@ -3,12 +3,12 @@
 
     <div class="item item-divider">Agendamento</div>
 
-    <div class="item item-body">
+    <div class="item item-body" ng-repeat="schedule in schedules">
       <div>
-        está marcado para <b>hoje às 14hs</b>
+        está marcado para <b>{{schedule.date | date:"dd/MM//yyyy" }} às {{schedule.time.hour}} {{schedule.time.minutes}} hs</b>
       </div>
       <div>
-        com a manicure: <b>Juliana Ferreira</b>
+        com a manicure: <b>{{schedule.prof.name}}</b>
       </div>
     </div>
 

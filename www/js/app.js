@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('manicure', ['ionic', 'manicure.controllers', 'manicure.services', 'ionic.utils'])
+angular.module('manicure', ['ionic', 'manicure.controllers', 'manicure.services', 'ionic.utils', 'firebase'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -60,6 +60,7 @@ angular.module('manicure', ['ionic', 'manicure.controllers', 'manicure.services'
     views: {
       'tab-home': {
         templateUrl: 'templates/client/tab-home.html',
+        controller: 'HomeCtrl'
       }
     }
   })

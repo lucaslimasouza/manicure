@@ -19,7 +19,10 @@ angular.module('manicure.controllers', [])
   $scope.friends = Professionals.all({id:11});
 })
 
-.controller('ProfDetailCtrl', function($scope, $stateParams, $state, Professionals) {
+.controller('ProfDetailCtrl', function($scope, $stateParams, $state, $localstorage, Professionals) {
+
+  var firebaseRef = new Firebase("https://manicure.firebaseio.com/profs/"+$stateParams.profId+"");
+
   $scope.prof = Professionals.get($stateParams.profId);
 
   // $scope.time = {
@@ -28,16 +31,40 @@ angular.module('manicure.controllers', [])
   // };
 
   $scope.schedule = {
-    client: "",
+    client: null,
     prof: $scope.prof,
     date: "",
     time: {hour: "", minutes: ""}
   };
 
+  var updateProfAtClient = function(){
+
+    var client = JSON.parse($localstorage.get('jsonUser'));
+    client.profLastSchedule = $stateParams.profId;
+    $scope.schedule.client = client;
+    $localstorage.set('jsonUser', JSON.stringify(client));
+  };
+
   $scope.save = function(){
-    console.log("agendamento =====");
+    updateProfAtClient();
+
+    var scheduleCopy = angular.copy($scope.schedule);
+    scheduleCopy.date = $scope.schedule.date.toString();
+
+    firebaseRef.child("schedules").push(scheduleCopy);
+
     $state.go('tab.home');
   };
+
+})
+
+.controller('HomeCtrl', function($scope, $localstorage, $firebaseArray) {
+
+  var client = JSON.parse($localstorage.get('jsonUser'));
+  var firebaseRef = new Firebase("https://manicure.firebaseio.com/profs/"+client.profLastSchedule+"/schedules");
+
+  $scope.schedules = $firebaseArray(firebaseRef);
+
 })
 
 .controller('AccountCtrl', function($scope, $state, $localstorage, Location) {
@@ -68,7 +95,7 @@ angular.module('manicure.controllers', [])
   var init = function(){
     var jsonUser = $localstorage.get('jsonUser', undefined);
 
-    if(jsonUser !== undefined){
+    if(jsonUser !== "undefined"){
       $state.go("tab.home");
     }
 
@@ -82,14 +109,24 @@ angular.module('manicure.controllers', [])
   };
 
   $scope.save = function(){
-    var jsonUser = JSON.stringify($scope.account);
-    $localstorage.set('jsonUser', jsonUser);
+    var jsonUser = undefined;
 
-    if($scope.account.isProf){
+    if($scope.account.isProf && ($scope.account.price.hands == 0) && ($scope.account.price.feet == 0) ){
       $state.go('app.prof');
-    }else{
+    }
+
+    // DEFINIR REGRA PARA PROF COM TODOS OS DADOS INSERIDOS - DIRECIONAR PARA HOME DE PROF
+
+    if(!$scope.account.isProf){
+
+      delete $scope.account.time;
+      delete $scope.account.price;
+
       $state.go('tab.home');
     }
+
+    jsonUser = JSON.stringify($scope.account);
+    $localstorage.set('jsonUser', jsonUser);
   };
 
   init();
